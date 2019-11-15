@@ -1,4 +1,4 @@
-package com.team.seller.ui.tools;
+package com.team.seller.ui.sell;
 
 import android.Manifest;
 import android.content.Context;

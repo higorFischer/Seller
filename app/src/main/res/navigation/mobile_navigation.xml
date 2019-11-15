@@ -10,34 +10,15 @@
         android:name="com.team.seller.ui.user.UserFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_user" />
-
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.team.seller.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.team.seller.ui.slideshow.SlideshowFragment"
+        android:id="@+id/nav_maps"
+        android:name="com.team.seller.ui.map.SlideshowFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_maps" />
 
     <fragment
         android:id="@+id/nav_sell"
-        android:name="com.team.seller.ui.tools.SellFragment"
+        android:name="com.team.seller.ui.sell.SellFragment"
         android:label="@string/menu_tools"
         tools:layout="@layout/fragment_sell" />
-
-    <fragment
-        android:id="@+id/nav_share"
-        android:name="com.team.seller.ui.share.ShareFragment"
-        android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
-
-    <fragment
-        android:id="@+id/nav_send"
-        android:name="com.team.seller.ui.send.SendFragment"
-        android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
 </navigation>

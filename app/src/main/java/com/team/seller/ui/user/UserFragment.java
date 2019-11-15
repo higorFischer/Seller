@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -54,7 +55,7 @@ public class UserFragment extends Fragment {
         UserView = root.findViewById(R.id.userList);
         NameText = root.findViewById(R.id.nameText);
         EmailText = root.findViewById(R.id.emailText);
-        PasswordText= root.findViewById(R.id.passwordText);
+        PasswordText = root.findViewById(R.id.passwordText);
 
         final UserRepository UserRepository = new UserRepository();
         final ProductRepository ProductRepository = new ProductRepository();
@@ -62,7 +63,13 @@ public class UserFragment extends Fragment {
         CreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserRepository.Create(new User(NameText.getText().toString(), EmailText.getText().toString(),PasswordText.getText().toString()));
+                if(HasFillAllFields()){
+                    UserRepository.Create(new User(NameText.getText().toString(), EmailText.getText().toString(),PasswordText.getText().toString()));
+                    Toast.makeText(getContext().getApplicationContext(), "Usuário cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(getContext().getApplicationContext(), "Preencha todos so campos", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -91,6 +98,11 @@ public class UserFragment extends Fragment {
         });
 
         return root;
+    }
 
+    public boolean HasFillAllFields(){
+        return  !NameText.getText().toString().matches("") &&
+                !EmailText.getText().toString().matches("") &&
+                !PasswordText.getText().toString().matches("");
     }
 }
