@@ -13,8 +13,11 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,20 +26,27 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.team.seller.R;
+import com.team.seller.models.Product;
 import com.team.seller.models.Sell;
+import com.team.seller.repositories.ProductRepository;
 import com.team.seller.repositories.SellRepository;
 
-public class SellFragment extends Fragment {
+public class SellFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
     LocationManager LocationManager;
     LocationListener LocationListener;
     Button LocationButton;
     Button CreateButton;
+    Spinner spinner;
 
     EditText LatText;
     EditText LongText;
     EditText PriceText;
     EditText NameText;
+    ArrayAdapter<Product> Adapter;
+    ArrayAdapter<String> AdapterString;
+    ArrayAdapter<CharSequence> AdapterChar;
+    String opcoes[]={"Produto 1", "Produto 2", "Produto 3"};
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -48,8 +58,17 @@ public class SellFragment extends Fragment {
         NameText = root.findViewById(R.id.nameValue);
         LocationButton = root.findViewById(R.id.locationButton);
         CreateButton = root.findViewById(R.id.createSell);
+        spinner = (Spinner) root.findViewById(R.id.productsSpinner);
+
+        AdapterString=new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, opcoes);
+        AdapterChar= ArrayAdapter.createFromResource(getContext(),R.array.options,android.R.layout.simple_list_item_1);
+        AdapterChar.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(AdapterString);
+
+        spinner.setOnItemSelectedListener(this);
 
         final SellRepository SellRepository = new SellRepository();
+        final ProductRepository ProductRepository = new ProductRepository();
 
 
         CreateButton.setOnClickListener(new View.OnClickListener() {
@@ -139,4 +158,15 @@ public class SellFragment extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        String text = adapterView.getItemAtPosition(i).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
 }

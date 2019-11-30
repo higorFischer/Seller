@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,24 +11,23 @@
         android:id="@+id/latValue"
         android:layout_width="355dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="40dp"
         android:ems="10"
-        android:hint="Latitude"
+        android:hint="@string/latitude"
+        android:layout_below="@id/priceValue"
+        android:layout_centerHorizontal="true"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameValue" />
+        />
 
     <Button
         android:id="@+id/locationButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="GET Location"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.903"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lngValue" />
+        android:text="@string/get_location"
+        android:layout_below="@id/lngValue"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"/>
 
     <EditText
         android:id="@+id/lngValue"
@@ -35,55 +35,50 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:ems="10"
-        android:hint="Longitude"
+        android:hint="@string/longitude"
+        android:layout_below="@id/latValue"
+        android:layout_centerHorizontal="true"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/latValue" />
+        />
 
     <EditText
         android:id="@+id/nameValue"
         android:layout_width="355dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="Name"
+        android:hint="@string/name"
+        android:layout_below="@id/productsSpinner"
+        android:layout_centerHorizontal="true"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        />
 
     <Button
         android:id="@+id/createSell"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="Create"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locationButton"
-        app:layout_constraintVertical_bias="0.98" />
+        android:text="@string/create"
+        android:layout_below="@id/locationButton"
+        android:layout_centerHorizontal="true"
+        />
 
     <EditText
         android:id="@+id/priceValue"
         android:layout_width="355dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Price"
+        android:hint="@string/price"
         android:inputType="numberDecimal"
-        app:layout_constraintBottom_toTopOf="@+id/latValue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameValue"
-        app:layout_constraintVertical_bias="0.141" />
+        android:layout_below="@id/nameValue"
+        android:layout_centerHorizontal="true" />
 
     <Spinner
         android:id="@+id/productsSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="20dp"
-        tools:layout_editor_absoluteY="417dp" />
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

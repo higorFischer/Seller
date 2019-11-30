@@ -56,7 +56,7 @@ public class UserActivity extends AppCompatActivity {
         // menu should be considered as top level destinations.
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_maps,
+                R.id.nav_user,R.id.nav_products, R.id.nav_maps,
                 R.id.nav_sell)
                 .setDrawerLayout(drawer)
                 .build();

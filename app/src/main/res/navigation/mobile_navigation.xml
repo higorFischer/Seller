@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_user">
 
     <fragment
-        android:id="@+id/nav_home"
+        android:id="@+id/nav_user"
         android:name="com.team.seller.ui.user.UserFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_user" />
@@ -19,6 +19,11 @@
     <fragment
         android:id="@+id/nav_sell"
         android:name="com.team.seller.ui.sell.SellFragment"
-        android:label="@string/menu_tools"
+        android:label="@string/menu_sell"
         tools:layout="@layout/fragment_sell" />
+    <fragment
+        android:id="@+id/nav_products"
+        android:name="com.team.seller.ui.product.ProductFragment"
+        android:label="@string/menu_products"
+        tools:layout="@layout/fragment_product" />
 </navigation>

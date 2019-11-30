@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/createButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/create"
+        android:layout_below="@id/descriptionText"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:visibility="gone"/>
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:id="@+id/idText"
+        android:textAlignment="center"
+        android:hint="@string/id"
+        android:inputType="text"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/productsSpinner"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/delete"
+        android:layout_below="@id/idText"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/readButton"
+        android:layout_width="383dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/read"
+        android:layout_below="@id/createButton"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:visibility="gone"/>
+
+    <ListView
+        android:id="@+id/productList"
+        android:layout_width="425dp"
+        android:layout_height="324dp"
+        android:drawSelectorOnTop="false"
+        android:layout_below="@id/readButton"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/productText"
+        android:layout_width="346dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="@string/product"
+        android:layout_centerHorizontal="true"
+        android:inputType="textPersonName"
+        android:layout_below="@id/updateButton"
+        android:visibility="gone"/>
+
+    <EditText
+        android:id="@+id/sizeText"
+        android:layout_width="346dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="@string/size"
+        android:inputType="text"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/productText"
+        android:visibility="gone"
+        />
+
+    <EditText
+        android:id="@+id/descriptionText"
+        android:layout_width="346dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="@string/description"
+        android:inputType="textLongMessage"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/sizeText"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/product"
+        android:layout_height="wrap_content"
+        android:layout_width="346dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:inputType="text"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/data"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/size"
+        android:layout_height="wrap_content"
+        android:layout_width="346dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:inputType="text"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/product"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_height="wrap_content"
+        android:layout_width="346dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:inputType="text"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/size"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/data"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="100dp"
+        android:ems="10"
+        android:textSize="23dp"
+        android:inputType="text"
+        android:textAlignment="center"
+        android:text="@string/data"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/idText"
+        android:visibility="gone"
+        />
+
+    <Button
+        android:id="@+id/find"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/find"
+        android:layout_below="@id/idText"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:visibility="gone"
+        />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/productsSpinner"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        android:id="@+id/updateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/update"
+        android:layout_below="@id/idText"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>

@@ -11,10 +11,40 @@
     <string name="menu_home">Accounts</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
+    <string name="menu_sell">Sell</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="menu_products">Products</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="create">Create</string>
+    <string name="read">Read</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="description">Description</string>
+    <string name="product">Product</string>
+    <string name="size">Size</string>
+    <string name="sellers">Seller</string>
+    <string name="sell">Sell</string>
+    <string name="products">Products</string>
+    <string name="registration">Registration</string>
+    <string name="maps">Maps</string>
+    <string name="selling_locations">Selling Locations</string>
+    <string name="delete">Delete</string>
+    <string name="id">Id</string>
+    <string name="update">Update</string>
+    <string name="data">Data:</string>
+    <string name="find">FIND</string>
+    <string name="latitude">Latitude</string>
+    <string name="get_location">GET Location</string>
+    <string name="longitude">Longitude</string>
+    <string name="price">Price</string>
+    <string-array name="options">
+        <item>Create</item>
+        <item>Update</item>
+        <item>Delete</item>
+        <item>List</item>
+    </string-array>
 </resources>
