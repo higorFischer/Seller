@@ -36,12 +36,10 @@ public class ProductFragment extends Fragment implements AdapterView.OnItemSelec
     Button DeleteButton;
     Button ReadButton;
     Button UpdateButton;
-    Button FindButton;
 
     TextView productTextView;
     TextView sizeTextView;
     TextView descriptionTextView;
-    TextView dataTextView;
 
     EditText ProductText;
     EditText DescriptionText;
@@ -66,7 +64,6 @@ public class ProductFragment extends Fragment implements AdapterView.OnItemSelec
         View root = inflater.inflate(R.layout.fragment_product, container, false);
         spinner = (Spinner) root.findViewById(R.id.crudSpinner);
         ProductSpinner = (Spinner) root.findViewById(R.id.productsSpinner);
-        //AdapterString=new ArrayAdapter<String>(ProductFragment,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.options));
         CreateButton = (Button) root.findViewById(R.id.createButton);
         DeleteButton = (Button) root.findViewById(R.id.deleteButton);
         ReadButton = (Button) root.findViewById(R.id.readButton);
@@ -77,8 +74,6 @@ public class ProductFragment extends Fragment implements AdapterView.OnItemSelec
         productTextView = (TextView) root.findViewById(R.id.product);
         sizeTextView = (TextView) root.findViewById(R.id.size);
         descriptionTextView = (TextView) root.findViewById(R.id.description);
-        dataTextView = (TextView) root.findViewById(R.id.data);
-        FindButton = (Button) root.findViewById(R.id.find);
 
         final ProductRepository ProductRepository = new ProductRepository();
 
@@ -277,7 +272,6 @@ public class ProductFragment extends Fragment implements AdapterView.OnItemSelec
                 DeleteButton.setVisibility(View.GONE);
                 ReadButton.setVisibility(View.GONE);
                 ProductView.setVisibility(View.GONE);
-                dataTextView.setVisibility(View.GONE);
                 productTextView.setVisibility(View.GONE);
                 sizeTextView.setVisibility(View.GONE);
                 ProductSpinner.setVisibility(View.GONE);
@@ -286,14 +280,12 @@ public class ProductFragment extends Fragment implements AdapterView.OnItemSelec
                 DescriptionText.setVisibility(View.VISIBLE);
                 CreateButton.setVisibility(View.VISIBLE);
                 UpdateButton.setVisibility(View.GONE);
-                FindButton.setVisibility(View.GONE);
                 break;
             case "Update":
                 ProductText.setVisibility(View.VISIBLE);
                 DescriptionText.setVisibility(View.VISIBLE);
                 ProductSpinner.setVisibility(View.VISIBLE);
                 CreateButton.setVisibility(View.GONE);
-                dataTextView.setVisibility(View.GONE);
                 productTextView.setVisibility(View.GONE);
                 sizeTextView.setVisibility(View.GONE);
                 descriptionTextView.setVisibility(View.GONE);
@@ -301,7 +293,6 @@ public class ProductFragment extends Fragment implements AdapterView.OnItemSelec
                 ReadButton.setVisibility(View.GONE);
                 ProductView.setVisibility(View.GONE);
                 UpdateButton.setVisibility(View.VISIBLE);
-                FindButton.setVisibility(View.VISIBLE);
                 break;
             case "Delete":
                 ProductText.setVisibility(View.GONE);
@@ -312,11 +303,9 @@ public class ProductFragment extends Fragment implements AdapterView.OnItemSelec
                 UpdateButton.setVisibility(View.GONE);
                 ProductSpinner.setVisibility(View.VISIBLE);
                 DeleteButton.setVisibility(View.VISIBLE);
-                dataTextView.setVisibility(View.VISIBLE);
                 productTextView.setVisibility(View.VISIBLE);
                 sizeTextView.setVisibility(View.VISIBLE);
                 descriptionTextView.setVisibility(View.VISIBLE);
-                FindButton.setVisibility(View.VISIBLE);
                 break;
             case "List":
                 ProductText.setVisibility(View.GONE);
@@ -327,11 +316,9 @@ public class ProductFragment extends Fragment implements AdapterView.OnItemSelec
                 UpdateButton.setVisibility(View.GONE);
                 ReadButton.setVisibility(View.VISIBLE);
                 ProductView.setVisibility(View.VISIBLE);
-                dataTextView.setVisibility(View.GONE);
                 productTextView.setVisibility(View.VISIBLE);
                 sizeTextView.setVisibility(View.VISIBLE);
                 descriptionTextView.setVisibility(View.VISIBLE);
-                FindButton.setVisibility(View.GONE);
                 break;
             default:
                 ProductText.setVisibility(View.GONE);
@@ -342,11 +329,9 @@ public class ProductFragment extends Fragment implements AdapterView.OnItemSelec
                 ReadButton.setVisibility(View.GONE);
                 ProductView.setVisibility(View.GONE);
                 UpdateButton.setVisibility(View.GONE);
-                dataTextView.setVisibility(View.GONE);
                 productTextView.setVisibility(View.GONE);
                 sizeTextView.setVisibility(View.GONE);
                 descriptionTextView.setVisibility(View.GONE);
-                FindButton.setVisibility(View.GONE);
                 break;
         }
     }
