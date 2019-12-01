@@ -26,4 +26,10 @@
         android:name="com.team.seller.ui.product.ProductFragment"
         android:label="@string/menu_products"
         tools:layout="@layout/fragment_product" />
+
+    <fragment
+        android:id="@+id/nav_report"
+        android:name="com.team.seller.ui.user.report.ReportFragment"
+        android:label="@string/menu_report"
+        tools:layout="@layout/fragment_report" />
 </navigation>

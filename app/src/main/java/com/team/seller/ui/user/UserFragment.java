@@ -64,8 +64,22 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(HasFillAllFields()){
-                    UserRepository.Create(new User(NameText.getText().toString(), EmailText.getText().toString(),PasswordText.getText().toString()));
-                    Toast.makeText(getContext().getApplicationContext(), "Usuário cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+                    UserRepository.Create(new User(NameText.getText().toString(), EmailText.getText().toString(), PasswordText.getText().toString()), new IOnGetDataListener() {
+                        @Override
+                        public void onSuccess(DataSnapshot dataSnapshot) {
+                            Toast.makeText(getContext().getApplicationContext(), "Usuário cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onStart() {
+
+                        }
+
+                        @Override
+                        public void onFailure() {
+
+                        }
+                    });
                 }
                 else
                     Toast.makeText(getContext().getApplicationContext(), "Preencha todos so campos", Toast.LENGTH_SHORT).show();

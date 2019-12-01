@@ -18,18 +18,20 @@
         android:layout_marginEnd="16dp"
         android:visibility="gone"/>
 
-    <EditText
-        android:layout_width="200dp"
+
+    <Spinner
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:id="@+id/productsSpinner"
         android:ems="10"
-        android:id="@+id/idText"
         android:textAlignment="center"
         android:hint="@string/id"
         android:inputType="text"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/productsSpinner"
-        android:visibility="gone"/>
+        android:layout_below="@id/crudSpinner"
+        android:visibility="gone"
+        />
+
 
     <Button
         android:id="@+id/deleteButton"
@@ -38,7 +40,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="10dp"
         android:text="@string/delete"
-        android:layout_below="@id/idText"
+        android:layout_below="@id/productsSpinner"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="16dp"
         android:visibility="gone"/>
@@ -75,19 +77,6 @@
         android:visibility="gone"/>
 
     <EditText
-        android:id="@+id/sizeText"
-        android:layout_width="346dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:hint="@string/size"
-        android:inputType="text"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/productText"
-        android:visibility="gone"
-        />
-
-    <EditText
         android:id="@+id/descriptionText"
         android:layout_width="346dp"
         android:layout_height="wrap_content"
@@ -96,7 +85,7 @@
         android:hint="@string/description"
         android:inputType="textLongMessage"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/sizeText"
+        android:layout_below="@id/productText"
         android:visibility="gone"/>
 
     <TextView
@@ -146,7 +135,7 @@
         android:textAlignment="center"
         android:text="@string/data"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/idText"
+        android:layout_below="@id/productsSpinner"
         android:visibility="gone"
         />
 
@@ -157,7 +146,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="10dp"
         android:text="@string/find"
-        android:layout_below="@id/idText"
+        android:layout_below="@id/productsSpinner"
         android:layout_alignParentStart="true"
         android:layout_marginStart="16dp"
         android:visibility="gone"
@@ -166,7 +155,7 @@
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/productsSpinner"
+        android:id="@+id/crudSpinner"
         android:layout_marginTop="16dp"
         android:layout_centerHorizontal="true"
         />
@@ -178,7 +167,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="10dp"
         android:text="@string/update"
-        android:layout_below="@id/idText"
+        android:layout_below="@id/productsSpinner"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="16dp"
         android:visibility="gone"

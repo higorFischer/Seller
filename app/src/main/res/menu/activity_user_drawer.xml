@@ -19,6 +19,11 @@
                 android:id="@+id/nav_sell"
                 android:icon="@drawable/ic_shopping_cart"
                 android:title="@string/sell" />
+
+            <item
+                android:id="@+id/nav_report"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/report" />
         </menu>
     </item>
 

@@ -59,7 +59,8 @@ public class SlideshowFragment extends Fragment {
 
                                 for(Sell entity : SellRepository.getEntites()){
                                     googleMap.addMarker(new MarkerOptions().position(new LatLng(entity.getLatitude(), entity.getLongitude()))
-                                            .title("Vendido"));
+                                            .title("Vendido\n 2")).setTag(0);
+
                                 }
 
                                 LatLng marker_latlng  = new LatLng(-19.93227755263461,-43.93133278436153);// MAKE THIS WHATEVER YOU WANT

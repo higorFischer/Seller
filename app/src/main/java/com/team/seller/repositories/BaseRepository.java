@@ -1,14 +1,7 @@
 package com.team.seller.repositories;
-
-import android.util.Base64;
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,6 +11,7 @@ import com.team.seller.commons.IOnGetDataListener;
 import com.team.seller.models.Entity;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public abstract class BaseRepository<T extends Entity>  {
 
@@ -34,16 +28,19 @@ public abstract class BaseRepository<T extends Entity>  {
 
     public abstract T ReadSnapShots(DataSnapshot snapshot);
 
-    public void Create(final T entity){
+    public void Create(final T entity, final IOnGetDataListener listener){
+        listener.onStart();
+
         DatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 DataBase.child(entity.getID()).setValue(entity);
-
+                listener.onSuccess(dataSnapshot);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                listener.onFailure();
             }
         });
     }
@@ -66,8 +63,51 @@ public abstract class BaseRepository<T extends Entity>  {
                 listener.onFailure();
             }
         });
+    }
 
+    public void ReadByName(final String Name, final IOnGetDataListener listener){
 
+        listener.onStart();
+        DataBase.orderByChild("name").equalTo(Name).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Entites = new ArrayList();
+
+                for(DataSnapshot entity: dataSnapshot.getChildren())
+                    Entites.add(ReadSnapShots(entity));
+
+                listener.onSuccess(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                listener.onFailure();
+            }
+        });
+    }
+
+    public void ReadByID(final String ID, final IOnGetDataListener listener){
+
+        listener.onStart();
+        DataBase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Entites = new ArrayList();
+
+                if(dataSnapshot.hasChild(ID)){
+                    ReadSnapShots(dataSnapshot.child(ID));
+                    listener.onSuccess(dataSnapshot);
+                } else {
+                    listener.onFailure();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                listener.onFailure();
+            }
+        });
     }
 
 
@@ -75,8 +115,11 @@ public abstract class BaseRepository<T extends Entity>  {
         DatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.hasChild(entity.getID()))
+
+                if(dataSnapshot.hasChild(entity.getID())){
+                    DataBase.child(entity.getID()).removeValue();
                     DataBase.child(entity.getID()).setValue(entity);
+                }
             }
 
             @Override
@@ -86,17 +129,21 @@ public abstract class BaseRepository<T extends Entity>  {
         });
     }
 
-    public void Delete(final T entity){
+    public void Delete(final T entity, final IOnGetDataListener listener){
+
+        listener.onStart();
         DatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild(entity.getID()));
                     DataBase.child(entity.getID()).removeValue();
+
+                listener.onSuccess(dataSnapshot);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                listener.onFailure();
             }
         });
     }

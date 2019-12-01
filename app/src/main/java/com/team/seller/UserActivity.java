@@ -57,7 +57,7 @@ public class UserActivity extends AppCompatActivity {
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_user,R.id.nav_products, R.id.nav_maps,
-                R.id.nav_sell)
+                R.id.nav_sell, R.id.nav_report)
                 .setDrawerLayout(drawer)
                 .build();
 

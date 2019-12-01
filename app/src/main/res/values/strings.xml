@@ -41,6 +41,8 @@
     <string name="get_location">GET Location</string>
     <string name="longitude">Longitude</string>
     <string name="price">Price</string>
+    <string name="report">Report</string>
+    <string name="menu_report">Report</string>
     <string-array name="options">
         <item>Create</item>
         <item>Update</item>

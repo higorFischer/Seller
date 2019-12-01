@@ -4,25 +4,15 @@ import androidx.annotation.NonNull;
 
 public class Product extends Entity<Product> {
 
-    String Size;
     String Description ;
 
-    public Product(String name, String size, String description) {
+    public Product(String name, String description) {
         super(name);
-        Size = size;
         Description = description;
     }
 
     public Product() {
         super("");
-    }
-
-    public String getSize() {
-        return Size;
-    }
-
-    public void setSize(String size) {
-        this.Size = size;
     }
 
     public String getDescription() {
@@ -38,7 +28,6 @@ public class Product extends Entity<Product> {
     public String toString() {
         return  "ID: " + ID + "\n"+
                 "Product: " + Name + "\n"+
-                "Size " + Size + "\n"+
                 "Description: " + Description + "\n";
     }
 }

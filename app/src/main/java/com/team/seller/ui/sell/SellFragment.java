@@ -25,11 +25,20 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.database.DataSnapshot;
 import com.team.seller.R;
+import com.team.seller.commons.IOnGetDataListener;
 import com.team.seller.models.Product;
 import com.team.seller.models.Sell;
+import com.team.seller.models.User;
 import com.team.seller.repositories.ProductRepository;
 import com.team.seller.repositories.SellRepository;
+import com.team.seller.repositories.UserRepository;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class SellFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
@@ -37,16 +46,28 @@ public class SellFragment extends Fragment implements AdapterView.OnItemSelected
     LocationListener LocationListener;
     Button LocationButton;
     Button CreateButton;
-    Spinner spinner;
+    Button NowButton;
 
     EditText LatText;
     EditText LongText;
     EditText PriceText;
-    EditText NameText;
-    ArrayAdapter<Product> Adapter;
+    EditText QuantityText;
+    EditText DayValue;
+    EditText MonthValue;
+    EditText YearValue;
+
+    Spinner Spinner;
     ArrayAdapter<String> AdapterString;
     ArrayAdapter<CharSequence> AdapterChar;
-    String opcoes[]={"Produto 1", "Produto 2", "Produto 3"};
+    String SpinnerValue;
+    ArrayList<String> opcoes = new ArrayList<String>();
+
+    Spinner SellerSpinner;
+    ArrayAdapter<String> SellerAdapterString;
+    ArrayAdapter<CharSequence> SellerAdapterChar;
+    String SellerSpinnerValue;
+    ArrayList<String> SellerOpcoes = new ArrayList<String>();
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -55,38 +76,36 @@ public class SellFragment extends Fragment implements AdapterView.OnItemSelected
         LatText = root.findViewById(R.id.latValue);
         LongText = root.findViewById(R.id.lngValue);
         PriceText = root.findViewById(R.id.priceValue);
-        NameText = root.findViewById(R.id.nameValue);
+        QuantityText = root.findViewById(R.id.quantityValue);
         LocationButton = root.findViewById(R.id.locationButton);
         CreateButton = root.findViewById(R.id.createSell);
-        spinner = (Spinner) root.findViewById(R.id.productsSpinner);
 
-        AdapterString=new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, opcoes);
-        AdapterChar= ArrayAdapter.createFromResource(getContext(),R.array.options,android.R.layout.simple_list_item_1);
-        AdapterChar.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(AdapterString);
+        NowButton = root.findViewById(R.id.useNow);
+        DayValue = root.findViewById(R.id.dayValue);
+        MonthValue = root.findViewById(R.id.monthValue);
+        YearValue = root.findViewById(R.id.yearValue);
 
-        spinner.setOnItemSelectedListener(this);
-
-        final SellRepository SellRepository = new SellRepository();
-        final ProductRepository ProductRepository = new ProductRepository();
-
-
-        CreateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Sell sell = new Sell(
-                        NameText.getText().toString(),
-                        Double.parseDouble(LatText.getText().toString()),
-                        Double.parseDouble(LongText.getText().toString()),
-                        Double.parseDouble(PriceText.getText().toString()));
-
-                SellRepository.Create(sell);
-
-                Toast.makeText(getContext().getApplicationContext(), "Venda cadastrada com sucesso", Toast.LENGTH_SHORT).show();
-            }
-        });
+        CreateButtonListener();
 
         LocationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        Spinner = root.findViewById(R.id.productsSpinner);
+        Spinner.setOnItemSelectedListener(this);
+
+        SellerSpinner = root.findViewById(R.id.sellerSpinner);
+        SellerSpinner.setOnItemSelectedListener(this);
+
+        StartSpinner();
+        StartSellerSpinner();
+
+        NowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Brazil"));
+                DayValue.setText(cal.get(Calendar.DAY_OF_MONTH)+"");
+                MonthValue.setText(cal.get(Calendar.MONTH)+1+"");
+                YearValue.setText(cal.get(Calendar.YEAR)+"");
+            }
+        });
 
         LocationListener = new LocationListener() {
 
@@ -161,7 +180,7 @@ public class SellFragment extends Fragment implements AdapterView.OnItemSelected
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        String text = adapterView.getItemAtPosition(i).toString();
+        SpinnerValue = adapterView.getItemAtPosition(i).toString();
     }
 
     @Override
@@ -169,4 +188,129 @@ public class SellFragment extends Fragment implements AdapterView.OnItemSelected
 
     }
 
+    public void CreateButtonListener(){
+
+        final SellRepository SellRepository = new SellRepository();
+        final ProductRepository ProductRepository = new ProductRepository();
+
+        CreateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProductRepository.ReadByName("testeProduto", new IOnGetDataListener() {
+                    @Override
+                    public void onSuccess(DataSnapshot dataSnapshot) {
+
+                        Sell sell = new Sell(
+                                SpinnerValue,
+                                SellerSpinnerValue,
+                                Double.parseDouble(LatText.getText().toString()),
+                                Double.parseDouble(LongText.getText().toString()),
+                                Double.parseDouble(PriceText.getText().toString()),
+                                Double.parseDouble(QuantityText.getText().toString()),
+                                new Date(Integer.parseInt(YearValue.getText().toString()),
+                                        Integer.parseInt(MonthValue.getText().toString()) - 1,
+                                        Integer.parseInt(DayValue.getText().toString())));
+
+                        SellRepository.Create(sell, new IOnGetDataListener() {
+                            @Override
+                            public void onSuccess(DataSnapshot dataSnapshot) {
+                                Toast.makeText(getContext().getApplicationContext(), "Venda cadastrada com sucesso", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onStart() {
+
+                            }
+
+                            @Override
+                            public void onFailure() {
+
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onFailure() {
+
+                    }
+                });
+            }
+        });
+    }
+
+    public void StartSpinner(){
+        final ProductRepository ProductRepository = new ProductRepository();
+
+          ProductRepository.Read(new IOnGetDataListener() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+
+                for(Product opt : ProductRepository.getEntites())
+                    opcoes.add(opt.getName());
+
+                AdapterString = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, opcoes);
+                AdapterChar= ArrayAdapter.createFromResource(getContext(),R.array.options,android.R.layout.simple_list_item_1);
+                AdapterChar.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                Spinner.setAdapter(AdapterString);
+
+            }
+
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
+    }
+
+    public void StartSellerSpinner(){
+        final UserRepository UserRepository = new UserRepository();
+
+        SellerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                SellerSpinnerValue = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        UserRepository.Read(new IOnGetDataListener() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+
+                for(User opt : UserRepository.getEntites())
+                    SellerOpcoes.add(opt.getName());
+
+                SellerAdapterString = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, SellerOpcoes);
+                SellerAdapterChar= ArrayAdapter.createFromResource(getContext(),R.array.options,android.R.layout.simple_list_item_1);
+                SellerAdapterChar.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                SellerSpinner.setAdapter(SellerAdapterString);
+
+            }
+
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
+    }
 }
